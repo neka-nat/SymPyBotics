@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>Sympybotics by cdsousa</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>Sympybotics</h1>
+        <h2>Symbolic Framework for Modeling and Identification of Robot Dynamics</h2>
+        <a href="https://github.com/cdsousa/sympybotics" class="button"><small>View project on</small>GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1>
+<a name="sympybotics" class="anchor" href="#sympybotics"><span class="octicon octicon-link"></span></a>SymPyBotics</h1>
+
+<p>Symbolic Framework for Modeling and Identification of Robot Dynamics</p>
+
+<p>Built on top of <a href="http://sympy.org">Sympy</a> and <a href="http://www.numpy.org/">Numpy</a> libraries.</p>
+
+<p>Also depends on <a href="https://github.com/cdsousa/symcode">SymCode</a>.
+(SymPyBotics <a href="https://github.com/cdsousa/sympybotics/tree/v0.3">v0.3</a> depends on SymCode <a href="https://github.com/cdsousa/symcode/tree/v0.2">v0.2</a>)</p>
+
+<h2>
+<a name="example" class="anchor" href="#example"><span class="octicon octicon-link"></span></a>Example</h2>
+
+<p>Definition of a 2 DOF example robot:</p>
+
+<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">sympy</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">sympybotics</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">rbtdef</span> <span class="o">=</span> <span class="n">sympybotics</span><span class="o">.</span><span class="n">RobotDef</span><span class="p">(</span><span class="s">'Example Robot'</span><span class="p">,</span> <span class="c"># robot name</span>
+<span class="o">...</span>                               <span class="p">[(</span><span class="s">'-pi/2'</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s">'q+pi/2'</span><span class="p">),</span>  <span class="c"># list of tuples with Denavit-Hartenberg parameters </span>
+<span class="o">...</span>                                <span class="p">(</span> <span class="s">'pi/2'</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s">'q-pi/2'</span><span class="p">)],</span> <span class="c"># (alpha, a, d, theta)</span>
+<span class="o">...</span>                               <span class="n">dh_convention</span><span class="o">=</span><span class="s">'standard'</span> <span class="c"># either 'standard' or 'modified'</span>
+<span class="o">...</span>                              <span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">rbtdef</span><span class="o">.</span><span class="n">frictionmodel</span> <span class="o">=</span> <span class="s">'simple'</span> <span class="c"># options are 'simple' and None, defaults to None</span>
+
+</pre></div>
+
+<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="k">print</span><span class="p">(</span><span class="n">rbtdef</span><span class="o">.</span><span class="n">dynparms</span><span class="p">())</span>
+<span class="p">[</span><span class="n">L_1xx</span><span class="p">,</span> <span class="n">L_1xy</span><span class="p">,</span> <span class="n">L_1xz</span><span class="p">,</span> <span class="n">L_1yy</span><span class="p">,</span> <span class="n">L_1yz</span><span class="p">,</span> <span class="n">L_1zz</span><span class="p">,</span> <span class="n">l_1x</span><span class="p">,</span> <span class="n">l_1y</span><span class="p">,</span> <span class="n">l_1z</span><span class="p">,</span> <span class="n">m_1</span><span class="p">,</span> <span class="n">fv_1</span><span class="p">,</span> <span class="n">fc_1</span><span class="p">,</span> <span class="n">L_2xx</span><span class="p">,</span> <span class="n">L_2xy</span><span class="p">,</span> <span class="n">L_2xz</span><span class="p">,</span> <span class="n">L_2yy</span><span class="p">,</span> <span class="n">L_2yz</span><span class="p">,</span> <span class="n">L_2zz</span><span class="p">,</span> <span class="n">l_2x</span><span class="p">,</span> <span class="n">l_2y</span><span class="p">,</span> <span class="n">l_2z</span><span class="p">,</span> <span class="n">m_2</span><span class="p">,</span> <span class="n">fv_2</span><span class="p">,</span> <span class="n">fc_2</span><span class="p">]</span>
+
+</pre></div>
+
+<p>Generation of geometric, kinematic and dynamic models:</p>
+
+<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">rbt</span> <span class="o">=</span> <span class="n">sympybotics</span><span class="o">.</span><span class="n">RobotDynCode</span><span class="p">(</span><span class="n">rbtdef</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">generating</span> <span class="n">geometric</span> <span class="n">model</span>
+<span class="n">generating</span> <span class="n">kinematic</span> <span class="n">model</span>
+<span class="n">generating</span> <span class="n">tau</span> <span class="n">code</span>
+<span class="n">generating</span> <span class="n">gravity</span> <span class="n">term</span> <span class="n">code</span>
+<span class="n">generating</span> <span class="n">coriolis</span> <span class="n">term</span> <span class="n">code</span>
+<span class="n">generating</span> <span class="n">inertia</span> <span class="n">matrix</span> <span class="n">code</span>
+<span class="n">generating</span> <span class="n">regressor</span> <span class="n">matrix</span> <span class="n">code</span>
+<span class="n">generating</span> <span class="n">friction</span> <span class="n">term</span> <span class="n">code</span>
+<span class="n">done</span>
+
+</pre></div>
+
+<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="k">print</span><span class="p">(</span><span class="n">rbt</span><span class="o">.</span><span class="n">geo</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="p">[</span><span class="o">-</span><span class="n">sin</span><span class="p">(</span><span class="n">q1</span><span class="p">)</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">q2</span><span class="p">),</span> <span class="o">-</span><span class="n">cos</span><span class="p">(</span><span class="n">q1</span><span class="p">),</span>  <span class="n">sin</span><span class="p">(</span><span class="n">q1</span><span class="p">)</span><span class="o">*</span><span class="n">cos</span><span class="p">(</span><span class="n">q2</span><span class="p">),</span> <span class="mi">0</span><span class="p">]</span>
+<span class="p">[</span> <span class="n">sin</span><span class="p">(</span><span class="n">q2</span><span class="p">)</span><span class="o">*</span><span class="n">cos</span><span class="p">(</span><span class="n">q1</span><span class="p">),</span> <span class="o">-</span><span class="n">sin</span><span class="p">(</span><span class="n">q1</span><span class="p">),</span> <span class="o">-</span><span class="n">cos</span><span class="p">(</span><span class="n">q1</span><span class="p">)</span><span class="o">*</span><span class="n">cos</span><span class="p">(</span><span class="n">q2</span><span class="p">),</span> <span class="mi">0</span><span class="p">]</span>
+<span class="p">[</span>         <span class="n">cos</span><span class="p">(</span><span class="n">q2</span><span class="p">),</span>        <span class="mi">0</span><span class="p">,</span>          <span class="n">sin</span><span class="p">(</span><span class="n">q2</span><span class="p">),</span> <span class="mi">0</span><span class="p">]</span>
+<span class="p">[</span>               <span class="mi">0</span><span class="p">,</span>        <span class="mi">0</span><span class="p">,</span>                <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+
+</pre></div>
+
+<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="k">print</span><span class="p">(</span><span class="n">rbt</span><span class="o">.</span><span class="n">kin</span><span class="o">.</span><span class="n">J</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="p">[</span><span class="mi">0</span><span class="p">,</span>        <span class="mi">0</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">0</span><span class="p">,</span>        <span class="mi">0</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">0</span><span class="p">,</span>        <span class="mi">0</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="n">cos</span><span class="p">(</span><span class="n">q1</span><span class="p">)]</span>
+<span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="n">sin</span><span class="p">(</span><span class="n">q1</span><span class="p">)]</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span>        <span class="mi">0</span><span class="p">]</span>
+
+</pre></div>
+
+<p>C function generation:</p>
+
+<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">tau_str</span> <span class="o">=</span> <span class="n">sympybotics</span><span class="o">.</span><span class="n">robotcodegen</span><span class="o">.</span><span class="n">dyn_code_to_func</span><span class="p">(</span><span class="s">'C'</span><span class="p">,</span> <span class="n">rbt</span><span class="o">.</span><span class="n">tau_code</span><span class="p">,</span> <span class="s">'tau'</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">rbt</span><span class="o">.</span><span class="n">dof</span><span class="p">,</span> <span class="n">rbtdef</span><span class="o">.</span><span class="n">dynparms</span><span class="p">())</span>
+
+
+</pre></div>
+
+<p>Doing <code>print(tau_str)</code>, function code will be output:</p>
+
+<div class="highlight"><pre><span class="kt">void</span> <span class="nf">tau</span><span class="p">(</span> <span class="kt">double</span><span class="o">*</span> <span class="n">tau_out</span><span class="p">,</span> <span class="k">const</span> <span class="kt">double</span><span class="o">*</span> <span class="n">parms</span><span class="p">,</span> <span class="k">const</span> <span class="kt">double</span><span class="o">*</span> <span class="n">q</span><span class="p">,</span> <span class="k">const</span> <span class="kt">double</span><span class="o">*</span> <span class="n">dq</span><span class="p">,</span> <span class="k">const</span> <span class="kt">double</span><span class="o">*</span> <span class="n">ddq</span> <span class="p">)</span>
+<span class="p">{</span>
+  <span class="kt">double</span> <span class="n">x0</span> <span class="o">=</span> <span class="n">sin</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+  <span class="kt">double</span> <span class="n">x1</span> <span class="o">=</span> <span class="o">-</span><span class="n">dq</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+  <span class="kt">double</span> <span class="n">x2</span> <span class="o">=</span> <span class="o">-</span><span class="n">x1</span><span class="p">;</span>
+  <span class="kt">double</span> <span class="n">x3</span> <span class="o">=</span> <span class="n">x0</span><span class="o">*</span><span class="n">x2</span><span class="p">;</span>
+  <span class="kt">double</span> <span class="n">x4</span> <span class="o">=</span> <span class="n">cos</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+  <span class="kt">double</span> <span class="n">x5</span> <span class="o">=</span> <span class="n">x2</span><span class="o">*</span><span class="n">x4</span><span class="p">;</span>
+  <span class="kt">double</span> <span class="n">x6</span> <span class="o">=</span> <span class="n">parms</span><span class="p">[</span><span class="mi">13</span><span class="p">]</span><span class="o">*</span><span class="n">x5</span> <span class="o">+</span> <span class="n">parms</span><span class="p">[</span><span class="mi">15</span><span class="p">]</span><span class="o">*</span><span class="n">dq</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">parms</span><span class="p">[</span><span class="mi">16</span><span class="p">]</span><span class="o">*</span><span class="n">x3</span><span class="p">;</span>
+  <span class="kt">double</span> <span class="n">x7</span> <span class="o">=</span> <span class="n">parms</span><span class="p">[</span><span class="mi">14</span><span class="p">]</span><span class="o">*</span><span class="n">x5</span> <span class="o">+</span> <span class="n">parms</span><span class="p">[</span><span class="mi">16</span><span class="p">]</span><span class="o">*</span><span class="n">dq</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">parms</span><span class="p">[</span><span class="mi">17</span><span class="p">]</span><span class="o">*</span><span class="n">x3</span><span class="p">;</span>
+  <span class="kt">double</span> <span class="n">x8</span> <span class="o">=</span> <span class="o">-</span><span class="n">ddq</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+  <span class="kt">double</span> <span class="n">x9</span> <span class="o">=</span> <span class="o">-</span><span class="n">x4</span><span class="p">;</span>
+  <span class="kt">double</span> <span class="n">x10</span> <span class="o">=</span> <span class="n">dq</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">x1</span><span class="p">;</span>
+  <span class="kt">double</span> <span class="n">x11</span> <span class="o">=</span> <span class="n">x0</span><span class="o">*</span><span class="n">x10</span> <span class="o">+</span> <span class="n">x8</span><span class="o">*</span><span class="n">x9</span><span class="p">;</span>
+  <span class="kt">double</span> <span class="n">x12</span> <span class="o">=</span> <span class="o">-</span><span class="n">x0</span><span class="o">*</span><span class="n">x8</span> <span class="o">-</span> <span class="n">x10</span><span class="o">*</span><span class="n">x4</span><span class="p">;</span>
+  <span class="kt">double</span> <span class="n">x13</span> <span class="o">=</span> <span class="mf">9.81</span><span class="o">*</span><span class="n">x0</span><span class="p">;</span>
+  <span class="kt">double</span> <span class="n">x14</span> <span class="o">=</span> <span class="mf">9.81</span><span class="o">*</span><span class="n">x4</span><span class="p">;</span>
+  <span class="kt">double</span> <span class="n">x15</span> <span class="o">=</span> <span class="n">parms</span><span class="p">[</span><span class="mi">12</span><span class="p">]</span><span class="o">*</span><span class="n">x5</span> <span class="o">+</span> <span class="n">parms</span><span class="p">[</span><span class="mi">13</span><span class="p">]</span><span class="o">*</span><span class="n">dq</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">parms</span><span class="p">[</span><span class="mi">14</span><span class="p">]</span><span class="o">*</span><span class="n">x3</span><span class="p">;</span>
+
+  <span class="n">tau_out</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">parms</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">*</span><span class="n">x8</span> <span class="o">+</span> <span class="n">x0</span><span class="o">*</span><span class="p">(</span><span class="n">parms</span><span class="p">[</span><span class="mi">14</span><span class="p">]</span><span class="o">*</span><span class="n">x11</span> <span class="o">+</span> <span class="n">parms</span><span class="p">[</span><span class="mi">16</span><span class="p">]</span><span class="o">*</span><span class="n">ddq</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">parms</span><span class="p">[</span><span class="mi">17</span><span class="p">]</span><span class="o">*</span><span class="n">x12</span> <span class="o">-</span> <span class="n">dq</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">x15</span> <span class="o">-</span> <span class="n">parms</span><span class="p">[</span><span class="mi">19</span><span class="p">]</span><span class="o">*</span><span class="n">x14</span> <span class="o">+</span> <span class="n">x5</span><span class="o">*</span><span class="n">x6</span><span class="p">)</span> <span class="o">-</span> <span class="n">x9</span><span class="o">*</span><span class="p">(</span><span class="n">parms</span><span class="p">[</span><span class="mi">12</span><span class="p">]</span><span class="o">*</span><span class="n">x11</span> <span class="o">+</span> <span class="n">parms</span><span class="p">[</span><span class="mi">13</span><span class="p">]</span><span class="o">*</span><span class="n">ddq</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">parms</span><span class="p">[</span><span class="mi">14</span><span class="p">]</span><span class="o">*</span><span class="n">x12</span> <span class="o">+</span> <span class="n">dq</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">x7</span> <span class="o">+</span> <span class="n">parms</span><span class="p">[</span><span class="mi">19</span><span class="p">]</span><span class="o">*</span><span class="n">x13</span> <span class="o">-</span> <span class="n">x3</span><span class="o">*</span><span class="n">x6</span><span class="p">);</span>
+  <span class="n">tau_out</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">parms</span><span class="p">[</span><span class="mi">13</span><span class="p">]</span><span class="o">*</span><span class="n">x11</span> <span class="o">+</span> <span class="n">parms</span><span class="p">[</span><span class="mi">15</span><span class="p">]</span><span class="o">*</span><span class="n">ddq</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">parms</span><span class="p">[</span><span class="mi">16</span><span class="p">]</span><span class="o">*</span><span class="n">x12</span> <span class="o">-</span> <span class="n">parms</span><span class="p">[</span><span class="mi">18</span><span class="p">]</span><span class="o">*</span><span class="n">x13</span> <span class="o">+</span> <span class="n">parms</span><span class="p">[</span><span class="mi">20</span><span class="p">]</span><span class="o">*</span><span class="n">x14</span> <span class="o">+</span> <span class="n">x15</span><span class="o">*</span><span class="n">x3</span> <span class="o">-</span> <span class="n">x5</span><span class="o">*</span><span class="n">x7</span><span class="p">;</span>
+
+  <span class="k">return</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>Dynamic base parameters:</p>
+
+<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">rbt</span><span class="o">.</span><span class="n">calc_base_parms</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">print</span><span class="p">(</span><span class="n">rbt</span><span class="o">.</span><span class="n">dyn</span><span class="o">.</span><span class="n">baseparms</span><span class="p">)</span>
+<span class="p">[</span><span class="n">L_1yy</span> <span class="o">+</span> <span class="n">L_2zz</span><span class="p">]</span>
+<span class="p">[</span>         <span class="n">fv_1</span><span class="p">]</span>
+<span class="p">[</span>         <span class="n">fc_1</span><span class="p">]</span>
+<span class="p">[</span><span class="n">L_2xx</span> <span class="o">-</span> <span class="n">L_2zz</span><span class="p">]</span>
+<span class="p">[</span>        <span class="n">L_2xy</span><span class="p">]</span>
+<span class="p">[</span>        <span class="n">L_2xz</span><span class="p">]</span>
+<span class="p">[</span>        <span class="n">L_2yy</span><span class="p">]</span>
+<span class="p">[</span>        <span class="n">L_2yz</span><span class="p">]</span>
+<span class="p">[</span>         <span class="n">l_2x</span><span class="p">]</span>
+<span class="p">[</span>         <span class="n">l_2z</span><span class="p">]</span>
+<span class="p">[</span>         <span class="n">fv_2</span><span class="p">]</span>
+<span class="p">[</span>         <span class="n">fc_2</span><span class="p">]</span>
+
+</pre></div>
+
+<h2>
+<a name="author" class="anchor" href="#author"><span class="octicon octicon-link"></span></a>Author</h2>
+
+<p><a href="https://github.com/cdsousa">Cristóvão Duarte Sousa</a></p>
+
+<h2>
+<a name="install" class="anchor" href="#install"><span class="octicon octicon-link"></span></a>Install</h2>
+
+<p>From git source:</p>
+
+<pre><code>git clone git@github.com:cdsousa/sympybotics.git
+cd sympybotics
+python setup.py install
+</code></pre>
+
+<h2>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p>New BSD license. See <a href="LICENSE.txt">License File</a></p>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/cdsousa/sympybotics/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/cdsousa/sympybotics/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/cdsousa/sympybotics"></a> is maintained by <a href="https://github.com/cdsousa">cdsousa</a>.</p>
+
+          <p>This page was generated by <a href="pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+  
+  </body>
+</html>
